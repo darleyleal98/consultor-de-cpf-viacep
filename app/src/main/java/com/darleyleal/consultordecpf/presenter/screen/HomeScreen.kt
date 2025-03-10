@@ -68,7 +68,10 @@ fun HomeScreen(
             ) {
                 TextField(
                     modifier = modifier.fillMaxWidth(),
-                    value = text, onValueChange = { text = it },
+                    value = text, onValueChange = {
+                        text = it
+                        if (it.isEmpty() || it.isNotEmpty()) viewModel.clear()
+                    },
                     leadingIcon = {
                         Icon(Icons.Default.Search, contentDescription = null)
                     },
@@ -132,6 +135,48 @@ fun HomeScreen(
                                                         fontWeight = FontWeight.Bold
                                                     )
                                                 ) {
+                                                    append("Localidade: ")
+                                                }
+
+                                                withStyle(
+                                                    style = SpanStyle(
+                                                        color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
+                                                        fontSize = 18.sp
+                                                    )
+                                                ) {
+                                                    append(it.localidade)
+                                                }
+                                            })
+
+                                            Text(text = buildAnnotatedString {
+                                                withStyle(
+                                                    style = SpanStyle(
+                                                        color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
+                                                        fontSize = 18.sp,
+                                                        fontWeight = FontWeight.Bold
+                                                    )
+                                                ) {
+                                                    append("Logradouro: ")
+                                                }
+
+                                                withStyle(
+                                                    style = SpanStyle(
+                                                        color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
+                                                        fontSize = 18.sp
+                                                    )
+                                                ) {
+                                                    append(it.logradouro)
+                                                }
+                                            })
+
+                                            Text(text = buildAnnotatedString {
+                                                withStyle(
+                                                    style = SpanStyle(
+                                                        color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
+                                                        fontSize = 18.sp,
+                                                        fontWeight = FontWeight.Bold
+                                                    )
+                                                ) {
                                                     append("Bairro: ")
                                                 }
 
@@ -153,7 +198,7 @@ fun HomeScreen(
                                                         fontWeight = FontWeight.Bold
                                                     )
                                                 ) {
-                                                    append("Cep: ")
+                                                    append("CEP: ")
                                                 }
 
                                                 withStyle(
@@ -204,7 +249,7 @@ fun HomeScreen(
                                                         fontSize = 18.sp
                                                     )
                                                 ) {
-                                                    append(it.complemento)
+                                                    append(it.ddd)
                                                 }
                                             })
 
